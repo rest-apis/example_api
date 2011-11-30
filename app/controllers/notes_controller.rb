@@ -42,6 +42,9 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
+    unless params[:note].present?
+      params[:note] = {title: params[:title], content: params[:content]}
+    end
     @note = Note.new(params[:note])
 
     respond_to do |format|
@@ -58,6 +61,9 @@ class NotesController < ApplicationController
   # PUT /notes/1
   # PUT /notes/1.json
   def update
+    unless params[:note].present?
+      params[:note] = {title: params[:title], content: params[:content]}
+    end
     @note = Note.find(params[:id])
 
     respond_to do |format|
